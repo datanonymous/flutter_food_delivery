@@ -27,7 +27,7 @@ class RecentOrders extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.all(12),
+            margin: EdgeInsets.all(12), 
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
