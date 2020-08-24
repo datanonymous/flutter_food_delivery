@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_delivery/models/food.dart';
 import 'package:flutter_food_delivery/models/restaurant.dart';
 import 'package:flutter_food_delivery/widgets/rating_stars.dart';
 
@@ -11,6 +12,85 @@ class RestaurantScreen extends StatefulWidget {
 }
 
 class _RestaurantScreenState extends State<RestaurantScreen> {
+  _buildMenuItem(Food menuItem) {
+    return Center(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            height: 175,
+            width: 175,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(menuItem.imageUrl),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+          Container(
+            height: 175,
+            width: 175,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.black.withOpacity(0.3),
+                  Colors.black87.withOpacity(0.3),
+                  Colors.black54.withOpacity(0.3),
+                  Colors.black38.withOpacity(0.3),
+                ],
+                stops: [.1, .4, .6, .9],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 65,
+            child: Column(
+              children: [
+                Text(
+                  menuItem.name,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+                Text(
+                  '\$${menuItem.price.toString()}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 10,
+            right: 10,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: IconButton(
+                icon: Icon(Icons.add),
+                iconSize: 30,
+                color: Colors.white,
+                onPressed: () {},
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +170,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   'Reviews',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
-                onPressed: (){},
+                onPressed: () {},
               ),
               FlatButton(
                 padding: EdgeInsets.symmetric(horizontal: 30),
@@ -102,9 +182,33 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   'Contact',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
-                onPressed: (){},
+                onPressed: () {},
               ),
             ],
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: Text(
+              'Menu',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Expanded(
+            child: GridView.count(
+              padding: EdgeInsets.all(10),
+              crossAxisCount: 2,
+              children: List.generate(widget.restaurant.menu.length, (index) {
+                Food food = widget.restaurant.menu[index];
+                return Center(
+                  child: _buildMenuItem(food),
+                );
+              }),
+            ),
           ),
         ],
       ),
