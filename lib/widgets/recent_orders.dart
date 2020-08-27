@@ -107,7 +107,6 @@ class RecentOrders extends StatelessWidget {
         ),
         Container(
           height: 120,
-          color: Colors.blue,
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.only(left: 10),
