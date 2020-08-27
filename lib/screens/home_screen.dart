@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_food_delivery/models/restaurant.dart';
-import 'package:flutter_food_delivery/screens/restaurant_screen.dart';
-import 'package:flutter_food_delivery/widgets/rating_stars.dart';
-import 'package:flutter_food_delivery/widgets/recent_orders.dart';
+import '../models/restaurant.dart';
+import './cart_screen.dart';
+import './restaurant_screen.dart';
+import '../widgets/rating_stars.dart';
+import '../widgets/recent_orders.dart';
 import '../data/data.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,10 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> restaurantList = [];
     restaurants.forEach((Restaurant restaurant) {
       restaurantList.add(GestureDetector(
-        onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=> RestaurantScreen(restaurant: restaurant))),
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => RestaurantScreen(restaurant: restaurant))),
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
@@ -49,20 +53,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       restaurant.name,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       overflow: TextOverflow.ellipsis,
                     ),
                     RatingStars(restaurant.rating),
                     SizedBox(height: 4),
                     Text(
                       restaurant.address,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       overflow: TextOverflow.ellipsis,
                     ),
                     SizedBox(height: 4),
                     Text(
                       '0.2 miles away',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
@@ -97,7 +104,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontSize: 20,
               ),
             ),
-            onPressed: () {},
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => CartScreen(),
+              ),
+            ),
           ),
         ],
       ),
